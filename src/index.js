@@ -101,3 +101,7 @@ function searchCurrentLocation(e) {
 
 Selector.form.addEventListener('submit', searchWeather);
 Selector.currentBtn.addEventListener('click', searchCurrentLocation);
+document.addEventListener('DOMContentLoaded', () => {
+  renderLoading();
+  getCity().then(getWeather).then(renderWeather);
+});
