@@ -1,1 +1,42 @@
 @import 'modern-normalize';
+
+* {
+  border: 1px solid #000;
+}
+
+#wrapper {
+  width: 100%;
+  max-width: 800px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.current-icon {
+  max-width: 80%;
+  flex: 1;
+}
+
+.current-icon img {
+  width: 100%;
+  margin: 0;
+  display: block;
+}
+
+.current-conditions {
+  display: grid;
+  grid-template-areas: 'temp conditions' 'temp feelslike';
+  gap: 1rem;
+}
+
+.current-conditions .temp {
+  grid-area: temp;
+  font-size: 4rem;
+}
+
+.future-conditions {
+  display: flex;
+  gap: 1rem;
+}
