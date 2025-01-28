@@ -1,8 +1,8 @@
 {
-  "name": "webpack-template",
+  "name": "weather-app",
   "version": "1.0.0",
   "main": "index.js",
-  "homepage": "http://cd-javier.github.io/webpack-template",
+  "homepage": "http://cd-javier.github.io/weather-app",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
