@@ -63,3 +63,25 @@ function renderWeather(obj) {
   Selector.days[3].temp.textContent = `${obj.days[3].tempMin}º | ${obj.days[3].tempMax}º`;
   Selector.days[3].conditions.textContent = obj.days[3].conditions;
 }
+
+function renderLoading() {
+    Selector.location.textContent = '...';
+    Selector.currentTemp.textContent = '...';
+    Selector.currentConditions.textContent = '...';
+    Selector.currentFeelsLike.textContent = '...';
+  
+    Selector.days[0].temp.textContent = '...';
+    Selector.days[0].conditions.textContent = '...';
+  
+    Selector.days[1].temp.textContent = '...';
+    Selector.days[1].conditions.textContent = '...';
+  
+    Selector.days[2].day.textContent = '...';
+    Selector.days[2].temp.textContent = '...';
+    Selector.days[2].conditions.textContent = '...';
+  
+    Selector.days[3].day.textContent = '...';
+    Selector.days[3].temp.textContent = '...';
+    Selector.days[3].conditions.textContent = '...';
+  }
+  
