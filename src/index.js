@@ -2,6 +2,41 @@ import './styles.css';
 import getWeather from './getWeather';
 import getCity from './getCity';
 
+const Selector = (function () {
+  return {
+    form: document.querySelector('form'),
+    location: document.getElementById('location'),
+    currentIcon: document.getElementById('current-icon'),
+    currentTemp: document.getElementById('current-temp'),
+    currentConditions: document.getElementById('current-conditions'),
+    currentFeelsLike: document.getElementById('current-feels-like'),
+    days: {
+      0: {
+        icon: document.getElementById('0-icon'),
+        temp: document.getElementById('0-temp'),
+        conditions: document.getAnimations('0-conditions'),
+      },
+      1: {
+        icon: document.getElementById('1-icon'),
+        temp: document.getElementById('1-temp'),
+        conditions: document.getAnimations('1-conditions'),
+      },
+      2: {
+        day: document.getElementById('2-day'),
+        icon: document.getElementById('2-icon'),
+        temp: document.getElementById('2-temp'),
+        conditions: document.getAnimations('2-conditions'),
+      },
+      3: {
+        day: document.getElementById('3-day'),
+        icon: document.getElementById('3-icon'),
+        temp: document.getElementById('3-temp'),
+        conditions: document.getAnimations('3-conditions'),
+      },
+    },
+  };
+})();
+
 function displayWeather(obj) {
   // eslint-disable-next-line no-console
   console.log(`
