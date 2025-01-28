@@ -10,9 +10,10 @@ async function getWeather(location = 'london') {
 
     return {
       location: processedData.resolvedAddress.split(',')[0],
-      country: processedData.resolvedAddress.split(',').pop(),
+      country: processedData.resolvedAddress.split(',').pop().trim(),
       currentConditions: {
         temp: processedData.currentConditions.temp,
+        feelsLike: processedData.currentConditions.feelslike,
         conditions: processedData.currentConditions.conditions,
         icon: processedData.currentConditions.icon,
       },
@@ -53,7 +54,8 @@ async function getWeather(location = 'london') {
     };
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error(err);
+    console.log("Oops, that doesn't look right");
+    return getCity().then(getWeather);
   }
 }
 
@@ -61,7 +63,8 @@ function displayWeather(obj) {
   // eslint-disable-next-line no-console
   console.log(`
         Location: ${obj.location}, ${obj.country}
-        Temperature: ${obj.currentConditions.temp}ºC
+        Temperature: ${obj.currentConditions.temp}
+        Feels Like: ${obj.currentConditions.feelsLike}
         Conditions: ${obj.currentConditions.conditions}
         ${obj.currentConditions.icon}
 
@@ -99,5 +102,5 @@ async function getCity() {
   const ipData = await fetch('https://ipinfo.io/json?token=d0371dd1f9210d');
   const jsonData = await ipData.json();
 
-  return `${jsonData.city} + ${jsonData.country}`;
+  return `${jsonData.city}, ${jsonData.region}, ${jsonData.country}`;
 }
