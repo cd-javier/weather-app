@@ -6,6 +6,7 @@ import weatherIcons from './icons';
 const Selector = (function () {
   return {
     form: document.querySelector('form'),
+    currentBtn: document.getElementById('current-location'),
     location: document.getElementById('location'),
     currentIcon: document.getElementById('current-icon'),
     currentTemp: document.getElementById('current-temp'),
@@ -87,9 +88,16 @@ function renderLoading() {
 
 function searchWeather(e) {
   e.preventDefault();
-
   renderLoading();
   getWeather(Selector.form['search-box'].value).then(renderWeather);
 }
 
+function searchCurrentLocation(e) {
+  e.preventDefault();
+  Selector.form.reset();
+  renderLoading();
+  getCity().then(getWeather).then(renderWeather);
+}
+
 Selector.form.addEventListener('submit', searchWeather);
+Selector.currentBtn.addEventListener('click', searchCurrentLocation);
