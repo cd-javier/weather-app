@@ -50,7 +50,11 @@ function renderWeather(obj) {
   Selector.body.dataset.style = obj.currentConditions.icon;
   Selector.location.textContent = `${obj.location}, ${obj.country}`;
   Selector.currentIcon.src = weatherIcons[obj.currentConditions.icon];
-  Selector.currentTemp.textContent = `${obj.currentConditions.temp}º`;
+  if (obj.currentConditions.temp % 1 !== 0) {
+    Selector.currentTemp.innerHTML = `${obj.currentConditions.temp.toString().split('.')[0]}<span>.${obj.currentConditions.temp.toString().split('.')[1]}</span>º`;
+  } else {
+    Selector.currentTemp.textContent = `${obj.currentConditions.temp}º`;
+  }
   Selector.currentConditions.textContent = obj.currentConditions.conditions;
   Selector.currentFeelsLike.textContent = `Feels like ${obj.currentConditions.feelsLike}º`;
 
