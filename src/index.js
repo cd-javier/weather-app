@@ -4,6 +4,7 @@ import getCity from './getCity';
 import weatherIcons from './icons';
 
 let unit = 'metric';
+let currentLocation;
 
 const Selector = (function () {
   return {
@@ -91,10 +92,15 @@ function renderLoading() {
   Selector.days[3].conditions.textContent = '...';
 }
 
+function updateLocation(location) {
+  currentLocation = location;
+}
+
 function searchWeather(e) {
   e.preventDefault();
   renderLoading();
-  getWeather(Selector.form['search-box'].value, unit).then(renderWeather);
+  updateLocation(Selector.form['search-box'].value);
+  getWeather(currentLocation, unit).then(renderWeather);
 }
 
 function searchCurrentLocation(e) {
@@ -102,8 +108,8 @@ function searchCurrentLocation(e) {
   Selector.form.reset();
   renderLoading();
   getCity()
-    .then((response) => getWeather(response, unit))
-    .then(renderWeather);
+    .then(updateLocation)
+    .then(() => getWeather(currentLocation, unit).then(renderWeather));
 }
 
 function changeUnit(e) {
@@ -115,6 +121,7 @@ function changeUnit(e) {
     unit = 'metric';
     Selector.metricSelector.classList.toggle('unit-selected', true);
     Selector.imperialSelector.classList.toggle('unit-selected', false);
+    getWeather(currentLocation, unit).then(renderWeather);
   } else if (
     target === Selector.imperialSelector &&
     !Selector.imperialSelector.classList.contains('unit-selected')
@@ -122,6 +129,7 @@ function changeUnit(e) {
     unit = 'us';
     Selector.imperialSelector.classList.toggle('unit-selected', true);
     Selector.metricSelector.classList.toggle('unit-selected', false);
+    getWeather(currentLocation, unit).then(renderWeather);
   }
 }
 
@@ -129,9 +137,7 @@ Selector.form.addEventListener('submit', searchWeather);
 Selector.currentBtn.addEventListener('click', searchCurrentLocation);
 document.addEventListener('DOMContentLoaded', () => {
   renderLoading();
-  getCity()
-    .then((response) => getWeather(response, unit))
-    .then(renderWeather);
+  getWeather(currentLocation, unit).then(renderWeather);
 });
 
 Selector.unitWrapper.addEventListener('click', changeUnit);

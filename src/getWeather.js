@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import getCity from './getCity';
 
-async function getWeather(location = 'london', unit = 'metric') {
+async function getWeather(location = 'madrid', unit = 'metric') {
   try {
     const data = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unit}&key=LZSJQYYC6AWFNBWYJETNVFUHM`
