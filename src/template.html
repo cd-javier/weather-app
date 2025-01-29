@@ -10,9 +10,13 @@
 <body>
   <div class="wrapper">
     <form class="search-box">
-      <button id="current-location" type="button">Current Location</button>
+      <div class="unit-wrapper" id="unit-wrapper">
+        <div class="unit-selector unit-selected" id="metric-selector">ºC</div>
+        <div class="unit-selector" id="imperial-selector">ºF</div>
+      </div>
       <input type="text" id="search-box">
       <button>Search</button>
+      <button id="current-location" type="button">Current Location</button>
     </form>
     <div class="location" id="location"></div>
     <div class="current-icon">

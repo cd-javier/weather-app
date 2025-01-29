@@ -1,10 +1,10 @@
 import { format } from 'date-fns';
 import getCity from './getCity';
 
-async function getWeather(location = 'london') {
+async function getWeather(location = 'london', unit = 'metric') {
   try {
     const data = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=LZSJQYYC6AWFNBWYJETNVFUHM`
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unit}&key=LZSJQYYC6AWFNBWYJETNVFUHM`
     );
     const processedData = await data.json();
 
@@ -54,7 +54,9 @@ async function getWeather(location = 'london') {
     };
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log("Oops, that doesn't look right");
+    console.log('Oops');
+    // eslint-disable-next-line no-console
+    console.log(err);
     return getCity().then(getWeather);
   }
 }

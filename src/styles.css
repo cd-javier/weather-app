@@ -4,24 +4,32 @@
   border: 1px solid #000;
 }
 
-#wrapper {
+.wrapper {
   width: 100%;
   max-width: 800px;
+
+  margin: 0 auto;
+  padding: 2rem;
 
   display: flex;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
+
+  background: grey;
+}
+
+.search-box {
+  display: flex;
 }
 
 .current-icon {
-  max-width: 80%;
+  max-width: 60%;
   flex: 1;
 }
 
-.current-icon img {
-  width: 100%;
-  margin: 0;
+img {
+  max-width: 100%;
   display: block;
 }
 

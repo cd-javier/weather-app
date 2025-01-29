@@ -3,8 +3,13 @@ import getWeather from './getWeather';
 import getCity from './getCity';
 import weatherIcons from './icons';
 
+let unit = 'metric';
+
 const Selector = (function () {
   return {
+    unitWrapper: document.getElementById('unit-wrapper'),
+    metricSelector: document.getElementById('metric-selector'),
+    imperialSelector: document.getElementById('imperial-selector'),
     form: document.querySelector('form'),
     currentBtn: document.getElementById('current-location'),
     location: document.getElementById('location'),
@@ -89,19 +94,44 @@ function renderLoading() {
 function searchWeather(e) {
   e.preventDefault();
   renderLoading();
-  getWeather(Selector.form['search-box'].value).then(renderWeather);
+  getWeather(Selector.form['search-box'].value, unit).then(renderWeather);
 }
 
 function searchCurrentLocation(e) {
   e.preventDefault();
   Selector.form.reset();
   renderLoading();
-  getCity().then(getWeather).then(renderWeather);
+  getCity()
+    .then((response) => getWeather(response, unit))
+    .then(renderWeather);
+}
+
+function changeUnit(e) {
+  const target = e.target.closest('.unit-selector');
+  if (
+    target === Selector.metricSelector &&
+    !Selector.metricSelector.classList.contains('unit-selected')
+  ) {
+    unit = 'metric';
+    Selector.metricSelector.classList.toggle('unit-selected', true);
+    Selector.imperialSelector.classList.toggle('unit-selected', false);
+  } else if (
+    target === Selector.imperialSelector &&
+    !Selector.imperialSelector.classList.contains('unit-selected')
+  ) {
+    unit = 'us';
+    Selector.imperialSelector.classList.toggle('unit-selected', true);
+    Selector.metricSelector.classList.toggle('unit-selected', false);
+  }
 }
 
 Selector.form.addEventListener('submit', searchWeather);
 Selector.currentBtn.addEventListener('click', searchCurrentLocation);
 document.addEventListener('DOMContentLoaded', () => {
   renderLoading();
-  getCity().then(getWeather).then(renderWeather);
+  getCity()
+    .then((response) => getWeather(response, unit))
+    .then(renderWeather);
 });
+
+Selector.unitWrapper.addEventListener('click', changeUnit);
