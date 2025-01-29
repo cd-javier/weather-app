@@ -8,6 +8,7 @@ let currentLocation;
 
 const Selector = (function () {
   return {
+    body: document.querySelector('body'),
     unitWrapper: document.getElementById('unit-wrapper'),
     metricSelector: document.getElementById('metric-selector'),
     imperialSelector: document.getElementById('imperial-selector'),
@@ -46,6 +47,7 @@ const Selector = (function () {
 })();
 
 function renderWeather(obj) {
+  Selector.body.dataset.style = obj.currentConditions.icon;
   Selector.location.textContent = `${obj.location}, ${obj.country}`;
   Selector.currentIcon.src = weatherIcons[obj.currentConditions.icon];
   Selector.currentTemp.textContent = `${obj.currentConditions.temp}º`;
@@ -105,7 +107,7 @@ function searchWeather(e) {
   }
 }
 
-function searchCurrentLocation(e) {
+function searchCurrentLocation() {
   Selector.form.reset();
   renderLoading();
   getCity()
