@@ -57,7 +57,7 @@ body {
 
 .wrapper {
   width: 100%;
-  max-width: 750px;
+  max-width: 800px;
 
   margin: 0 auto;
   padding: 2rem;
@@ -105,7 +105,6 @@ body {
 .search-box input {
   flex: 1;
   flex-shrink: 1;
-  min-width: 0;
   background-color: var(--tertiary-bg, #243742);
   border: none;
   border-radius: 20px;
@@ -143,6 +142,17 @@ body {
   height: 80%;
 }
 
+.location {
+  font-weight: 200;
+}
+
+.current-situation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: inherit;
+}
+
 .current-icon {
   max-width: 40%;
 }
@@ -171,6 +181,8 @@ img {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  font-weight: 200;
 }
 
 .future-conditions {
@@ -190,6 +202,7 @@ img {
   min-width: 150px;
 
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
@@ -197,14 +210,16 @@ img {
   padding: 1rem;
   border-radius: 16px;
   text-align: center;
+  font-weight: 200;
 }
 
 .future-icon {
   width: 70%;
 }
 
-.future-day > *:last-child {
-  margin-top: 0.5rem;
+.future-day .temp,
+.future-day .conditions {
+  font-size: 0.75rem;
 }
 
 .error-message {
@@ -231,4 +246,16 @@ img {
 .hidden {
   opacity: 0;
   transition: 1s;
+}
+
+@media only screen and (min-width: 750px) {
+  .current-situation {
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: flex-end; */
+  }
+
+  .future-conditions {
+    margin-top: 0;
+  }
 }
