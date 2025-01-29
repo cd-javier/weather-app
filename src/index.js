@@ -1,11 +1,88 @@
 import './styles.css';
-import getWeather from './getWeather';
-import getCity from './getCity';
 import weatherIcons from './icons';
+import { format } from 'date-fns';
+
+//--------------------------------
+//     WEATHER API HANDLING
+//--------------------------------
+
+async function getWeather(location = 'madrid', unit = 'metric') {
+  try {
+    const data = await fetch(
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unit}&key=LZSJQYYC6AWFNBWYJETNVFUHM`
+    );
+    const processedData = await data.json();
+
+    return {
+      location: processedData.resolvedAddress.split(',')[0],
+      country: processedData.resolvedAddress.split(',').pop().trim(),
+      currentConditions: {
+        temp: processedData.currentConditions.temp,
+        feelsLike: processedData.currentConditions.feelslike,
+        conditions: processedData.currentConditions.conditions,
+        icon: processedData.currentConditions.icon,
+      },
+      days: {
+        0: {
+          dayOfWeek: format(new Date(processedData.days[0].datetime), 'EEEE'),
+          date: format(new Date(processedData.days[0].datetime), 'dd MMM'),
+          conditions: processedData.days[0].conditions,
+          tempMax: Math.floor(processedData.days[0].tempmax),
+          tempMin: Math.floor(processedData.days[0].tempmin),
+          icon: processedData.days[0].icon,
+        },
+        1: {
+          dayOfWeek: format(new Date(processedData.days[1].datetime), 'EEEE'),
+          date: format(new Date(processedData.days[1].datetime), 'dd MMM'),
+          conditions: processedData.days[1].conditions,
+          tempMax: Math.floor(processedData.days[1].tempmax),
+          tempMin: Math.floor(processedData.days[1].tempmin),
+          icon: processedData.days[1].icon,
+        },
+        2: {
+          dayOfWeek: format(new Date(processedData.days[2].datetime), 'EEEE'),
+          date: format(new Date(processedData.days[2].datetime), 'dd MMM'),
+          conditions: processedData.days[2].conditions,
+          tempMax: Math.floor(processedData.days[2].tempmax),
+          tempMin: Math.floor(processedData.days[2].tempmin),
+          icon: processedData.days[2].icon,
+        },
+        3: {
+          dayOfWeek: format(new Date(processedData.days[3].datetime), 'EEEE'),
+          date: format(new Date(processedData.days[3].datetime), 'dd MMM'),
+          conditions: processedData.days[3].conditions,
+          tempMax: Math.floor(processedData.days[3].tempmax),
+          tempMin: Math.floor(processedData.days[3].tempmin),
+          icon: processedData.days[3].icon,
+        },
+      },
+    };
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log(err);
+    return getCity().then(getWeather);
+  }
+}
+
+//--------------------------------
+//        IP API HANDLING
+//--------------------------------
+
+async function getCity() {
+  const ipData = await fetch('https://ipinfo.io/json?token=d0371dd1f9210d');
+  const jsonData = await ipData.json();
+
+  return `${jsonData.city}, ${jsonData.region}, ${jsonData.country}`;
+}
+
+//--------------------------------
+//        DOM MANIPULATION
+//--------------------------------
 
 let unit = 'metric';
 let currentLocation;
 
+// Query Selectors
 const Selector = (function () {
   return {
     body: document.querySelector('body'),
@@ -46,6 +123,7 @@ const Selector = (function () {
   };
 })();
 
+// Render the weather on screen
 function renderWeather(obj) {
   Selector.body.dataset.style = obj.currentConditions.icon;
   Selector.location.textContent = `${obj.location}, ${obj.country}`;
@@ -77,6 +155,7 @@ function renderWeather(obj) {
   Selector.days[3].conditions.textContent = obj.days[3].conditions;
 }
 
+// Render screen during loading
 function renderLoading() {
   Selector.location.textContent = '...';
   Selector.currentTemp.textContent = '...';
@@ -98,10 +177,12 @@ function renderLoading() {
   Selector.days[3].conditions.textContent = '...';
 }
 
+// Change the value of currentLocation
 function updateLocation(location) {
   currentLocation = location;
 }
 
+// Search form behavior
 function searchWeather(e) {
   e.preventDefault();
   if (Selector.form['search-box'].value) {
@@ -111,6 +192,7 @@ function searchWeather(e) {
   }
 }
 
+// Current location behavior
 function searchCurrentLocation() {
   Selector.form.reset();
   renderLoading();
@@ -119,6 +201,7 @@ function searchCurrentLocation() {
     .then(() => getWeather(currentLocation, unit).then(renderWeather));
 }
 
+// Unit toggle behavior
 function changeUnit(e) {
   const target = e.target.closest('.unit-selector');
   if (
@@ -140,11 +223,14 @@ function changeUnit(e) {
   }
 }
 
+//--------------------------------
+//        EVENT LISTENERS
+//--------------------------------
+
 Selector.form.addEventListener('submit', searchWeather);
 Selector.currentBtn.addEventListener('click', searchCurrentLocation);
 document.addEventListener('DOMContentLoaded', () => {
   renderLoading();
   getWeather(currentLocation, unit).then(renderWeather);
 });
-
 Selector.unitWrapper.addEventListener('click', changeUnit);
