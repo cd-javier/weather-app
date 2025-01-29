@@ -57,14 +57,14 @@ body {
 
 .wrapper {
   width: 100%;
-  max-width: 800px;
+  max-width: 750px;
 
   margin: 0 auto;
   padding: 2rem;
 
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
 
   color: var(--text, #243742);
@@ -72,6 +72,7 @@ body {
 
 .search-box {
   width: 100%;
+  max-width: 600px;
   display: flex;
   gap: 0.5rem;
 }
@@ -139,15 +140,11 @@ body {
 .search-box button svg {
   fill: var(--secondary-text, #ffffff);
   width: 80%;
-}
-
-.location {
-  font-size: 1.5rem;
+  height: 80%;
 }
 
 .current-icon {
-  max-width: 60%;
-  flex: 1;
+  max-width: 40%;
 }
 
 img {
@@ -180,7 +177,7 @@ img {
   display: flex;
   gap: 1rem;
   justify-content: flex-start;
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 100%;
 
   overflow-x: auto;
@@ -190,7 +187,6 @@ img {
   background-color: var(--secondary-bg, #51ace1);
   color: var(--secondary-text, #ffffff);
 
-  flex: 1;
   min-width: 150px;
 
   display: flex;
@@ -203,13 +199,17 @@ img {
   text-align: center;
 }
 
+.future-icon {
+  width: 70%;
+}
+
 .future-day > *:last-child {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .error-message {
   position: absolute;
-  top: 100px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
 
