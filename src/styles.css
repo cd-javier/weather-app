@@ -203,6 +203,11 @@ img {
   padding: 0 1rem;
 
   overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.future-conditions::-webkit-scrollbar {
+  display: none;
 }
 
 .future-day {
