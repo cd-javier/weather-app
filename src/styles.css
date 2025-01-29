@@ -91,6 +91,11 @@ body {
   border-radius: 20px;
 }
 
+.unit-selector,
+.search-box button {
+  cursor: pointer;
+}
+
 .unit-selected {
   background-color: var(--secondary-bg, #51ace1);
   color: var(--secondary-text, #ffffff);
