@@ -1,7 +1,8 @@
 @import 'modern-normalize';
 
 :root {
-  --bg: #98ceed;
+  --bg-gradient: linear-gradient(180deg, #CFECFD 0%, #61C0F8 80%);;
+  --bg: #61C0F8;
   --text: #243742;
   --secondary-bg: #51ace1;
   --secondary-text: #ffffff;
@@ -20,18 +21,29 @@
   gap: 2rem;
   align-items: center;
 
-  background: var(--bg, #98ceed);
+  background: var(--bg-gradient, #61C0F8);
   color: var(--text, #243742);
 }
 
 .search-box {
-  display: flex;
   width: 100%;
+  display: flex;
+  gap: 0.5rem;
 }
 
-.unit-wrapper,
-.search-box input {
+.unit-wrapper {
   background-color: var(--tertiary-bg, #243742);
+  display: flex;
+  border-radius: 20px;
+}
+
+.unit-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
 }
 
 .unit-selected {
@@ -41,11 +53,39 @@
 
 .search-box input {
   flex: 1;
+  background-color: var(--tertiary-bg, #243742);
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  padding: 0 1rem;
+  color: var(--text, #243842);
+}
+.search-box input::placeholder {
+  color: var(--text, #243842);
+  opacity: 0.5;
 }
 
 .search-box button {
   background-color: var(--secondary-bg, #51ace1);
   color: var(--secondary-text, #ffffff);
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.search-box button svg {
+  fill: var(--secondary-text, #ffffff);
+  width: 80%;
+}
+
+.location {
+  font-size: 1.5rem;
 }
 
 .current-icon {
@@ -59,22 +99,45 @@ img {
 }
 
 .current-conditions {
-  display: grid;
-  grid-template-areas: 'temp conditions' 'temp feelslike';
+  display: flex;
+  align-items: flex-end;
   gap: 1rem;
 }
 
 .current-conditions .temp {
   grid-area: temp;
-  font-size: 4rem;
+  font-size: 5rem;
+  line-height: 0.9;
+}
+
+.conditions-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .future-conditions {
   display: flex;
   gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .future-day {
   background-color: var(--secondary-bg, #51ace1);
   color: var(--secondary-text, #ffffff);
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 1rem;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.future-day > *:last-child {
+  margin-top: 1rem;
 }
