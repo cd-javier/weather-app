@@ -52,6 +52,7 @@
 body {
   background: var(--bg-gradient, #61c0f8);
   min-height: 100svh;
+  position: relative;
 }
 
 .wrapper {
@@ -199,4 +200,30 @@ img {
 
 .future-day > *:last-child {
   margin-top: 1rem;
+}
+
+.error-message {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 400px;
+  max-width: 80%;
+
+  padding: 1rem;
+  border-radius: 1rem;
+  text-align: center;
+
+  background-color: #fff2c3;
+  color: #85743a;
+  border: 1px solid #bda44c;
+  opacity: 1;
+
+  transition: 1s;
+}
+
+.hidden {
+  opacity: 0;
+  transition: 1s;
 }

@@ -60,6 +60,7 @@ async function getWeather(location = 'madrid', unit = 'metric') {
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);
+    showError();
     return getCity().then(getWeather);
   }
 }
@@ -221,6 +222,22 @@ function changeUnit(e) {
     Selector.metricSelector.classList.toggle('unit-selected', false);
     getWeather(currentLocation, unit).then(renderWeather);
   }
+}
+
+function showError() {
+  const errorMessage = document.createElement('div');
+  errorMessage.classList.add('error-message');
+  errorMessage.textContent =
+  'Oops, we could not find that location. Showing your estimated current location instead';
+  Selector.body.appendChild(errorMessage);
+
+  setTimeout(() => {
+    errorMessage.classList.add('hidden');
+  }, 3000);
+
+  setTimeout(() => {
+    errorMessage.remove();
+  }, 4000);
 }
 
 //--------------------------------
