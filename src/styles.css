@@ -97,6 +97,8 @@ body {
 
 .search-box input {
   flex: 1;
+  flex-shrink: 1;
+  min-width: 0;
   background-color: var(--tertiary-bg, #243742);
   border: none;
   border-radius: 20px;
@@ -114,6 +116,7 @@ body {
 }
 
 .search-box button {
+  flex-shrink: 0;
   background-color: var(--secondary-bg, #51ace1);
   color: var(--secondary-text, #ffffff);
   border: none;
@@ -153,7 +156,6 @@ img {
 }
 
 .current-conditions .temp {
-  grid-area: temp;
   font-size: 5rem;
   line-height: 0.9;
 }
@@ -171,8 +173,11 @@ img {
 .future-conditions {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 2rem;
+  width: 100%;
+
+  overflow-x: auto;
 }
 
 .future-day {
@@ -180,6 +185,8 @@ img {
   color: var(--secondary-text, #ffffff);
 
   flex: 1;
+  min-width: 150px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
