@@ -60,7 +60,7 @@ body {
   max-width: 800px;
 
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 0;
 
   display: flex;
   flex-direction: column;
@@ -75,6 +75,7 @@ body {
   max-width: 600px;
   display: flex;
   gap: 0.5rem;
+  padding: 0 1rem;
 }
 
 .unit-wrapper {
@@ -105,6 +106,7 @@ body {
 .search-box input {
   flex: 1;
   flex-shrink: 1;
+  min-width: 0;
   background-color: var(--tertiary-bg, #243742);
   border: none;
   border-radius: 20px;
@@ -136,10 +138,16 @@ body {
   border-radius: 20px;
 }
 
+.search-box button:first-of-type {
+  margin-left: -48px;
+}
+
 .search-box button svg {
   fill: var(--secondary-text, #ffffff);
   width: 80%;
   height: 80%;
+  min-width: 16px;
+  min-height: 16px;
 }
 
 .location {
@@ -191,6 +199,8 @@ img {
   justify-content: flex-start;
   margin-top: 1rem;
   width: 100%;
+
+  padding: 0 1rem;
 
   overflow-x: auto;
 }
