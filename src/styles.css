@@ -99,14 +99,18 @@ body {
   flex: 1;
   background-color: var(--tertiary-bg, #243742);
   border: none;
-  outline: none;
   border-radius: 20px;
   padding: 0 1rem;
   color: var(--text, #243842);
 }
+
 .search-box input::placeholder {
   color: var(--text, #243842);
   opacity: 0.5;
+}
+
+.search-box input:focus {
+  outline: 1px solid var(--secondary-bg, #51ace1);
 }
 
 .search-box button {
