@@ -98,13 +98,14 @@ function updateLocation(location) {
 
 function searchWeather(e) {
   e.preventDefault();
-  renderLoading();
-  updateLocation(Selector.form['search-box'].value);
-  getWeather(currentLocation, unit).then(renderWeather);
+  if (Selector.form['search-box'].value) {
+    renderLoading();
+    updateLocation(Selector.form['search-box'].value);
+    getWeather(currentLocation, unit).then(renderWeather);
+  }
 }
 
 function searchCurrentLocation(e) {
-  e.preventDefault();
   Selector.form.reset();
   renderLoading();
   getCity()
