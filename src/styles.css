@@ -306,7 +306,9 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+
+  text-align: center;
 }
 
 .hour img {
@@ -346,10 +348,13 @@ img {
 @media only screen and (min-width: 750px) {
   .current-situation {
     flex-direction: row;
-    justify-content: center;
   }
 
   .future-conditions {
     margin-top: 0;
+  }
+
+  .hour {
+    gap: 2rem;
   }
 }

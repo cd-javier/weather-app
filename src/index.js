@@ -173,7 +173,7 @@ function renderSingleHour(obj, day, hour) {
           <img src="${weatherIcons[hourData.icon]}" alt="">
           <div class="temp">${hourData.temp}º</div>
           <div class="conditions">${hourData.conditions}</div>
-          <div class="chance">${Math.trunc(hourData.precipprob)}% chance of precipitation</div>
+          <div class="chance">${Math.trunc(hourData.precipprob)}% chance of rain</div>
   `;
 
   return DOMHour;
